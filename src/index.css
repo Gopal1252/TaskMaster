@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+    .button {
+        @apply bg-[#00ADB5] py-2 px-4
+        rounded-full text-white 
+        font-semibold hover:opacity-90 duration-200
+        cursor-pointer
+    }
+}
+
