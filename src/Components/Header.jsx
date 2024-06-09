@@ -5,12 +5,18 @@ import { useState } from "react";
 import { CiMenuKebab } from "react-icons/ci";
 import HeaderDropdown from "./HeaderDropdown";
 import AddEditBoardModal from '../Modals/AddEditBoardModal';
+import { useDispatch, useSelector } from "react-redux";
 
 
 function Header({boardModalOpen, setBoardModalOpen}) {
 
+    const dispatch = useDispatch();
+
     const [openDropdown, setOpenDropdown] = useState(false);
     const [boardType, setBoardType] = useState('add');
+
+    const boards = useSelector((state)=>state.boards);
+    const board = boards.find(board => board.isActive);
 
   return (
     <div className='p-4 left-0 right-0 bg-white dark:bg-[#2b2c37] z-50'>
@@ -23,7 +29,7 @@ function Header({boardModalOpen, setBoardModalOpen}) {
                 <img src={logo} alt="logo" className="h-20 v-20 cursor-pointer"/>
                 <h3 className="hidden md:inline-block font-bold font-sans md:text-4xl">TaskMaster</h3>
                 <div className="flex items-center">
-                    <h3 className="truncate max-w-[200px] md:text-2xl text-xl font-bold md:ml-20 font-sans">Board Name</h3>
+                    <h3 className="truncate max-w-[200px] md:text-2xl text-xl font-bold md:ml-20 font-sans">{board.name}</h3>
                     {openDropdown ? <FaAngleUp onClick={() => setOpenDropdown(!openDropdown)} className="w-3 ml-2 md:hidden cursor-pointer" /> : <FaAngleDown onClick={() => setOpenDropdown(!openDropdown)} className="w-3 ml-2 md:hidden cursor-pointer" />}
                 </div>
             </div>
