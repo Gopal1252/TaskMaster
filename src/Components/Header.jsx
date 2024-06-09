@@ -4,11 +4,13 @@ import { FaAngleUp } from "react-icons/fa";
 import { useState } from "react";
 import { CiMenuKebab } from "react-icons/ci";
 import HeaderDropdown from "./HeaderDropdown";
+import AddEditBoardModal from '../Modals/AddEditBoardModal';
 
 
-function Header() {
+function Header({boardModalOpen, setBoardModalOpen}) {
 
     const [openDropdown, setOpenDropdown] = useState(false);
+    const [boardType, setBoardType] = useState('add');
 
   return (
     <div className='p-4 left-0 right-0 bg-white dark:bg-[#2b2c37] z-50'>
@@ -36,7 +38,9 @@ function Header() {
 
         </header>
 
-        {openDropdown && <HeaderDropdown setOpenDropdown={setOpenDropdown}/>}
+        {openDropdown && <HeaderDropdown setBoardModalOpen={setBoardModalOpen} setOpenDropdown={setOpenDropdown}/>}
+
+        {boardModalOpen && <AddEditBoardModal type={boardType} setBoardModalOpen={setBoardModalOpen} /> }
 
     </div>
   ) 
